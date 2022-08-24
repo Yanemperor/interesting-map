@@ -1,0 +1,43 @@
+
+.container {
+	padding: 16px;
+}
+.list {
+	/* margin-top: 12px; */
+}
+.cell {
+	/* padding: 16px; */
+	padding-top: 16px;
+}
+.cell-image {
+	background: #d8d8d8;
+	border-radius: 4px;
+}
+.cell-bottom {
+	display: flex;
+	justify-content: space-between;
+	padding-top: 8px;
+	padding-bottom: 16px;
+}
+.cell-zan {
+	display: flex;
+	align-items: center;
+}
+.cell-title {
+	font-size: 14px;
+	font-weight: 400;
+	color: #333333;
+	line-height: 20px;
+}
+.cell-time {
+	font-size: 12px;
+	font-weight: 400;
+	color: #999999;
+	line-height: 16px;
+	padding-top: 8px;
+}
+.cell-line {
+	margin-left: 16px;
+	margin-right: 16px;
+}
+

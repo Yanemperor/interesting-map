@@ -1,0 +1,47 @@
+{
+	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarTitleText": "奇趣地图"
+		}
+	}, {
+		"path": "pages/about/about",
+		"style": {
+			"navigationBarTitleText": "关于",
+			"navigationBarBackgroundColor": "#ffffff"
+		}
+	}, {
+		"path": "pages/map/map",
+		"style": {
+			"navigationBarTitleText": "详情"
+		}
+	}],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	},
+	"tabBar": {
+		"color": "#bfbfbf",
+		"selectedColor": "#333333",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabbar_map.png",
+				"selectedIconPath": "static/tabbar_map_selected.png",
+				"text": "地图"
+			},
+			{
+				"pagePath": "pages/about/about",
+				"iconPath": "static/tabbar_about.png",
+				"selectedIconPath": "static/tabbar_about_selected.png",
+				"text": "关于"
+			}
+		]
+	}
+}
