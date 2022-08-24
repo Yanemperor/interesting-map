@@ -2,10 +2,11 @@
 	<view class="container">
 		<u-toast ref="uToast"></u-toast>
 		<view class="">
-			<map class="map" :longitude="110.237768" :latitude="20.068638" enable-satellite="true" scale="14"></map>
+			<map class="map" :longitude="item.longitude" :latitude="item.latitude" enable-satellite="true"
+				:scale="item.scale"></map>
 		</view>
 		<view class="text">
-			<u--text :text="text"></u--text>
+			<u--text :text="item.details"></u--text>
 		</view>
 		<uni-fab ref="fab" :pattern="pattern" :content="content" horizontal="right" vertical="bottom"
 			direction="vertical" @trigger="trigger" @fabClick="fabClick" />
@@ -18,6 +19,7 @@
 	export default {
 		data() {
 			return {
+				item: {},
 				show: false,
 				sheetShow: false,
 				shareImg: "/static/news-share.png",
@@ -51,14 +53,22 @@
 				],
 			}
 		},
-		onLoad() {
+		onLoad(option) {
 			wx.showShareMenu({
 				withShareTicket: true,
 				//设置下方的Menus菜单，才能够让发送给朋友与分享到朋友圈两个按钮可以点击
 				menus: ["shareAppMessage", "shareTimeline"]
-			})
+			});
+			this.initData(option.json)
 		},
 		methods: {
+			initData(json) {
+				console.log(json);
+				this.item = JSON.parse(json);
+				uni.setNavigationBarTitle({
+					title: this.item.name
+				});
+			},
 			fabClick() {
 				// uni.showToast({
 				// 	title: '点击了悬浮按钮',

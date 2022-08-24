@@ -33,7 +33,7 @@
     "useCompilerPlugins": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.25.3",
+  "libVersion": "2.25.4",
   "appid": "wx120caeda2bba21e7",
   "projectname": "interesting-map",
   "condition": {},
