@@ -14,7 +14,7 @@
           </view>
           <u-icon name="arrow-right" color="#b2b2b2"></u-icon>
         </view>
-        <u-line color="#f5f5f5"></u-line>
+        <u-line color="#eeeeee"></u-line>
       </view>
     </view>
   </view>
@@ -27,17 +27,13 @@ export default {
       logo: '/static/logo.png',	  
       items: [
         {
-          name: '官网',
-          url: '/pages/about/web',
+          name: '投稿',
+          url: '/pages/about/contribute',
         },
         {
-          name: '隐私政策',
-          url: '/pages/about/privacy-policy',
-        },
-        {
-          name: '用户协议',
-          url: '/pages/about/user-agreement',
-        },
+          name: '更多小程序',
+          url: '/pages/about/more_app',
+        }
       ],
     }
   },

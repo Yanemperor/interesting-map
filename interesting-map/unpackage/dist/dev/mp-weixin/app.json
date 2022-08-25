@@ -1,8 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/map/map",
     "pages/about/about",
-    "pages/map/map"
+    "pages/about/more_app",
+    "pages/about/contribute"
   ],
   "subPackages": [],
   "window": {

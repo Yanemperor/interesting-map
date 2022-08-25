@@ -32,7 +32,7 @@
 						</view>
 					</view>
 					<view class="cell-line">
-						<u-line margin="16" color="#f5f5f5"></u-line>
+						<u-line margin="16" color="#eeeeee"></u-line>
 					</view>
 				</u-list-item>
 			</u-list>
@@ -160,13 +160,13 @@
 		},
 		methods: {
 			loadData() {
-				// console.log("获取数据");
-				// const db = uniCloud.database();
-				// const resume = db.collection("address_info").get().then((res) => {
-				// 	console.log(res)
-				// }).catch((e) => {
-				// 	console.log(e)
-				// });
+				console.log("获取数据");
+				const db = uniCloud.database();
+				const resume = db.collection("address_info").get().then((res) => {
+					console.log("获取数据成功",res);
+				}).catch((e) => {
+					console.log("获取数据失败",e);
+				});
 								
 				var banners = [];
 				for (let i = 0; i < this.items.length; i++) {
