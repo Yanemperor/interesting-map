@@ -1,5 +1,9 @@
 {
   "navigationBarTitleText": "投稿",
   "navigationBarBackgroundColor": "#ffffff",
-  "usingComponents": {}
+  "usingComponents": {
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
+    "u-line": "/uni_modules/uview-ui/components/u-line/u-line",
+    "u-toast": "/uni_modules/uview-ui/components/u-toast/u-toast"
+  }
 }

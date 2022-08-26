@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/index/details",
     "pages/map/map",
     "pages/about/about",
     "pages/about/more_app",
@@ -21,6 +22,12 @@
     "list": [
       {
         "pagePath": "pages/index/index",
+        "iconPath": "static/tabbar_index.png",
+        "selectedIconPath": "static/tabbar_index_selected.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/map/map",
         "iconPath": "static/tabbar_map.png",
         "selectedIconPath": "static/tabbar_map_selected.png",
         "text": "地图"

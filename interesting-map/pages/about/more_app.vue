@@ -3,7 +3,6 @@
 		<view class="head">
 			<view class="head-title"> 欢迎体验其他小程序 </view>
 		</view>
-		<u-line color="#eeeeee"></u-line>
 		<view class="cell-bg">
 			<view v-for="(item, index) in items" :key="index">
 				<view class="cell" @click="cellClick(item)">

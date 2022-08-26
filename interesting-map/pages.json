@@ -6,9 +6,14 @@
 			"navigationBarBackgroundColor": "#ffffff"
 		}
 	}, {
-		"path": "pages/map/map",
+		"path": "pages/index/details",
 		"style": {
 			"navigationBarTitleText": "详情"
+		}
+	}, {
+		"path": "pages/map/map",
+		"style": {
+			"navigationBarTitleText": "地图"
 		}
 	}, {
 		"path": "pages/about/about",
@@ -45,6 +50,12 @@
 		"backgroundColor": "#ffffff",
 		"list": [{
 				"pagePath": "pages/index/index",
+				"iconPath": "static/tabbar_index.png",
+				"selectedIconPath": "static/tabbar_index_selected.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/map/map",
 				"iconPath": "static/tabbar_map.png",
 				"selectedIconPath": "static/tabbar_map_selected.png",
 				"text": "地图"

@@ -2,7 +2,7 @@
   <view class="bg">
     <view class="logo">
       <view class="">
-        <u-image :src="logo" mode="heightFix" width="150" height="54"></u-image>
+        <u-image :src="logo" mode="heightFix" width="100" height="100"></u-image>
       </view>
       <label class="name">奇趣地图 V1.0.0</label>
     </view>
