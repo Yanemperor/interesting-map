@@ -218,60 +218,7 @@ var _default =
       zan: "/static/cell_zan.png",
       defalutImg: "/static/defalut-img.png",
       banners: [],
-      items: [{
-        "name": "北京故宫",
-        "address": "北京故宫",
-        "longitude": "116.39706",
-        "latitude": "39.91584",
-        "scale": "15",
-        "isBanner": false,
-        "zan": 0,
-        "imageUrl": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-6ad7a12a-0993-4c3e-8b0b-f6c4f77738b6/dd04ea7b-7b7d-478e-a956-c4b3766c28b6.jpg",
-        "details": "北京故宫是中国明清两代的皇家宫殿，旧称紫禁城，位于北京中轴线的中心" },
-      {
-        "name": "北京大兴机场",
-        "address": "北京大兴机场",
-        "longitude": "116.41652",
-        "latitude": "39.51120",
-        "scale": "17",
-        "isBanner": false,
-        "zan": 0,
-        "imageUrl": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-6ad7a12a-0993-4c3e-8b0b-f6c4f77738b6/30a3f308-1e1f-4bf6-9da1-801cb6d4cfe1.jpg",
-        "details": "北京大兴机场" },
-      {
-        "name": "上帝之眼",
-        "address": "上海滴水湖",
-        "longitude": "121.941259",
-        "latitude": "30.896982",
-        "scale": "14",
-        "isBanner": true,
-        "zan": 0,
-        "imageUrl": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-6ad7a12a-0993-4c3e-8b0b-f6c4f77738b6/cee5c4ca-5b4e-41fc-90a6-2a71ab7ace03.jpg",
-        "details": "这个被叫做上帝之眼的地方叫做滴水湖，它就位于上海的浦东新区，不知道大家在来这里旅游的时候是否也来过滴水湖旅游呢，他们这里的滴水湖呈现的是一个非常正的圆形，而且它的直径达到了2600米，在高空中俯瞰下去就像是上帝之眼一样，而且有不少的人在看到下面这张图片之后，不由得想起一句非常中二的话，那就是你凝望着深渊，深渊也正在望着你。" },
-
-      {
-        "name": "砖石项链",
-        "address": "常州市的武进区春秋地面城池遗址",
-        "longitude": "119.924203",
-        "latitude": "31.703026",
-        "scale": "15",
-        "isBanner": true,
-        "zan": 0,
-        "imageUrl": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-6ad7a12a-0993-4c3e-8b0b-f6c4f77738b6/87377f16-ebbd-47c1-b015-cd85cca07435.jpg",
-        "details": "这个被叫做钻石项链的地方就是一个遗址公园，它是我们国家现存为止保存得最完整的春秋地面城池遗址，这里就位于常州市的武进区，他的样子非常的好看，虽然这里都是道路，但是他这里就像是一个迷宫一样，看起来非常的曲折。" },
-
-      {
-        "name": "巨型八卦图",
-        "address": "杭州八卦田遗址公园",
-        "longitude": "120.151673",
-        "latitude": "30.211053",
-        "scale": "17",
-        "isBanner": true,
-        "zan": 0,
-        "imageUrl": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-6ad7a12a-0993-4c3e-8b0b-f6c4f77738b6/4c375449-1426-43c4-8e0b-b5da58925548.jpg",
-        "details": "这里就是八卦田遗址公园，之所以有一个这样的名字就是因为他们这里的意志非常的像一个八卦牌一样，毕竟古代的皇帝都相信一些鬼神之说，所以他们有一些东西都建造的就像是八卦一样，其实他们这里还有着一定的作用，那就是举行一些仪式，希望来年农业能够风调雨顺之类的。" }] };
-
-
+      items: [] };
 
   },
   onLoad: function onLoad() {
@@ -283,15 +230,18 @@ var _default =
     this.loadData();
   },
   methods: {
-    loadData: function loadData() {
+    loadData: function loadData() {var _this = this;
       console.log("获取数据");
       var db = uniCloud.database();
       var resume = db.collection("address_info").get().then(function (res) {
-        console.log("获取数据成功", res);
+        console.log("获取数据成功", res.result.data);
+        _this.items = res.result.data;
+        _this.setBanner();
       }).catch(function (e) {
         console.log("获取数据失败", e);
       });
-
+    },
+    setBanner: function setBanner() {
       var banners = [];
       for (var i = 0; i < this.items.length; i++) {
         var item = this.items[i];

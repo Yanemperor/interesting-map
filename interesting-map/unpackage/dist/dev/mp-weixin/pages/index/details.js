@@ -164,7 +164,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uniCloud, uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -226,6 +226,20 @@ var _default =
     this.initData(option.json);
   },
   methods: {
+    clickZan: function clickZan() {
+      console.log("获取数据");
+      var db = uniCloud.database();
+      var dbCmd = db.command;
+      db.collection('address_info').where({
+        _id: '63088219abcff22faaa3c47e' }).
+      update({
+        zan: dbCmd.inc(1) }).
+      then(function (res) {
+        console.log("点赞成功", res);
+      }).catch(function (e) {
+        console.log("点赞失败", e);
+      });
+    },
     initData: function initData(json) {
       console.log(json);
       this.item = JSON.parse(json);
@@ -239,17 +253,30 @@ var _default =
       // 	icon: 'none'
       // })
     },
+    testco: function testco() {// 注意异步
+
+      uniCloud.callFunction({
+        name: 'updateZan',
+        data: { a: 1, b: 2 } }).
+      then(function (res) {
+        console.log(res.result); // 结果是 {sum: 3}
+      }).catch(function (err) {
+        console.error(err);
+      });
+    },
     trigger: function trigger(e) {
       console.log(e);
       if (e.index == 0) {
-        this.$refs.uToast.show({
-          type: 'success',
-          title: '默认主题',
-          message: "点赞成功",
-          complete: function complete() {
+        this.testco();
+        // this.clickZan();
+        // this.$refs.uToast.show({
+        // 	type: 'success',
+        // 	title: '默认主题',
+        // 	message: "点赞成功",
+        // 	complete() {
 
-          } });
-
+        // 	}
+        // })
       } else if (e.index == 1) {
         this.sheetShow = true;
       }
@@ -291,7 +318,7 @@ var _default =
         summary: "" };
 
     } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 142)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

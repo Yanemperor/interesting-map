@@ -60,6 +60,20 @@
 			this.initData(option.json)
 		},
 		methods: {
+			clickZan() {
+				console.log("获取数据");
+				const db = uniCloud.database();
+				const dbCmd = db.command;
+				db.collection('address_info').where({
+					_id: '63088219abcff22faaa3c47e'
+				}).update({
+					zan: dbCmd.inc(1)
+				}).then((res) => {
+					console.log("点赞成功", res);
+				}).catch((e) => {
+					console.log("点赞失败", e);
+				});
+			},
 			initData(json) {
 				console.log(json);
 				this.item = JSON.parse(json);
@@ -73,17 +87,30 @@
 				// 	icon: 'none'
 				// })
 			},
+			testco() { // 注意异步
+			
+				uniCloud.callFunction({
+					name: 'updateZan',
+					data: {a:1,b:2}
+				}).then((res) => {
+					console.log(res.result) // 结果是 {sum: 3}
+				}).catch((err) => {
+					console.error(err)
+				})
+			},
 			trigger(e) {
 				console.log(e)
 				if (e.index == 0) {
-					this.$refs.uToast.show({
-						type: 'success',
-						title: '默认主题',
-						message: "点赞成功",
-						complete() {
+					this.testco();
+					// this.clickZan();
+					// this.$refs.uToast.show({
+					// 	type: 'success',
+					// 	title: '默认主题',
+					// 	message: "点赞成功",
+					// 	complete() {
 
-						}
-					})
+					// 	}
+					// })
 				} else if (e.index == 1) {
 					this.sheetShow = true;
 				}
