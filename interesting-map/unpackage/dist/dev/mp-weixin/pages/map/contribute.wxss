@@ -1,0 +1,54 @@
+
+.search {
+	padding-top: 12px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-bottom: 12px;
+}
+.map {
+	width: 100%;
+	height: 350px;
+	overflow: hidden;
+}
+.longitude-latitude-bg {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 16px;
+	margin-left: 16px;
+	margin-right: 16px;
+}
+.longitude-item {
+	display: flex;
+	align-items: center;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #333333;
+	height: 30px;
+	font-size: 12px;
+	border-radius: 5px;
+	padding-left: 6px;
+	padding-right: 6px;
+}
+.latitude-item {
+	display: flex;
+	align-items: center;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #333333;
+	height: 30px;
+	font-size: 12px;
+	border-radius: 5px;
+	padding-left: 6px;
+	padding-right: 6px;
+}
+.input-bg {
+	margin-top: 16px;
+	margin-left: 16px;
+	margin-right: 16px;
+}
+.bottom-bg {
+	margin-top: 16px;
+	margin-left: 16px;
+	margin-right: 16px;
+}
+

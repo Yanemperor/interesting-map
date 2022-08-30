@@ -1,11 +1,11 @@
 <template>
 	<view class="container">
 		<view class="head">
-			<view class="head-title"> 欢迎投稿 </view>
-			<view class="head-text"> 如果您有其他有趣的内容想要分享给大家，请发送邮件到: </view>
+			<view class="head-title"> 商务合作 </view>
+			<view class="head-text"> 请发送邮件到: </view>
 			<view class="head-mail-bg">
 				<view class="head-mail">
-					zhouzilongmini2@163.com
+					zhouzilong09@163.com
 				</view>
 				<view class="head-mail-btn">
 					<u-button type="primary" size="mini" text="复制" @click="copy"></u-button>
@@ -28,7 +28,7 @@
 		methods: {
 			copy() {
 				uni.setClipboardData({
-					data: "zhouzilongmini2@163.com"
+					data: "zhouzilong09@163.com"
 				});
 				uni.showToast({
 					title: '复制成功',

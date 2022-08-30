@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "投稿",
+  "navigationBarBackgroundColor": "#ffffff",
+  "usingComponents": {
+    "u-toast": "/uni_modules/uview-ui/components/u-toast/u-toast",
+    "u-search": "/uni_modules/uview-ui/components/u-search/u-search",
+    "u--input": "/uni_modules/uview-ui/components/u--input/u--input",
+    "u--textarea": "/uni_modules/uview-ui/components/u--textarea/u--textarea",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
+    "u-modal": "/uni_modules/uview-ui/components/u-modal/u-modal"
+  }
+}

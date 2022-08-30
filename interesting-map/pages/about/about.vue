@@ -4,7 +4,7 @@
       <view class="">
         <u-image :src="logo" mode="heightFix" width="100" height="100"></u-image>
       </view>
-      <label class="name">奇趣地图 V1.0.0</label>
+      <label class="name">鸟瞰地理 V1.0.0</label>
     </view>
     <view class="cell-bg">
       <view v-for="(item, index) in items" :key="index">
@@ -27,8 +27,8 @@ export default {
       logo: '/static/logo.png',	  
       items: [
         {
-          name: '投稿',
-          url: '/pages/about/contribute',
+          name: '商务合作',
+          url: '/pages/about/business_cooperation',
         },
         {
           name: '更多小程序',

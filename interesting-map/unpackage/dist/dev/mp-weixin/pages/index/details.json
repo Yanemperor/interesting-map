@@ -2,7 +2,6 @@
   "navigationBarTitleText": "详情",
   "usingComponents": {
     "u-toast": "/uni_modules/uview-ui/components/u-toast/u-toast",
-    "u--text": "/uni_modules/uview-ui/components/u--text/u--text",
     "uni-fab": "/uni_modules/uni-fab/components/uni-fab/uni-fab",
     "u-action-sheet": "/uni_modules/uview-ui/components/u-action-sheet/u-action-sheet"
   }

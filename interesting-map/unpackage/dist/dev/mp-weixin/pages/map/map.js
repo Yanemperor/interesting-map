@@ -98,13 +98,13 @@ var components
 try {
   components = {
     uToast: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uview-ui/components/u-toast/u-toast */ "uni_modules/uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-toast/u-toast.vue */ 227))
+      return __webpack_require__.e(/*! import() | uni_modules/uview-ui/components/u-toast/u-toast */ "uni_modules/uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-toast/u-toast.vue */ 235))
     },
     uSearch: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-search/u-search */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-search/u-search")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-search/u-search.vue */ 257))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-search/u-search */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-search/u-search")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-search/u-search.vue */ 259))
     },
     uniFab: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-fab/components/uni-fab/uni-fab */ "uni_modules/uni-fab/components/uni-fab/uni-fab").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-fab/components/uni-fab/uni-fab.vue */ 240))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-fab/components/uni-fab/uni-fab */ "uni_modules/uni-fab/components/uni-fab/uni-fab").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-fab/components/uni-fab/uni-fab.vue */ 242))
     }
   }
 } catch (e) {
@@ -161,7 +161,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
 //
 //
 //
@@ -181,8 +182,15 @@ var QQMapWX = __webpack_require__(/*! @/libs/qqmap-wx-jssdk.js */ 160);var _defa
 {
   data: function data() {
     return {
+      details: "",
+      popupShow: false,
       latitude: "39.91507",
       longitude: "116.39686",
+      centerLocation: {
+        latitude: "39.91507",
+        longitude: "116.39686",
+        scale: "15" },
+
       scale: "15",
       pattern: {
         color: '#7A7E83',
@@ -214,6 +222,13 @@ var QQMapWX = __webpack_require__(/*! @/libs/qqmap-wx-jssdk.js */ 160);var _defa
 
   },
   methods: {
+    regionchange: function regionchange(e) {
+      console.log(e);
+      if (e.type == "end") {
+        this.centerLocation = e.detail.centerLocation;
+        this.centerLocation.scale = e.detail.scale;
+      }
+    },
     search: function search(value) {
       console.log(value);
       this.getLocation(value);
@@ -227,13 +242,8 @@ var QQMapWX = __webpack_require__(/*! @/libs/qqmap-wx-jssdk.js */ 160);var _defa
     trigger: function trigger(e) {
       console.log(e);
       if (e.index == 0) {
-        this.$refs.uToast.show({
-          type: 'success',
-          title: '默认主题',
-          message: "点赞成功",
-          complete: function complete() {
-
-          } });
+        uni.navigateTo({
+          url: "/pages/map/contribute?latitude=" + this.centerLocation.latitude + "&longitude=" + this.centerLocation.longitude + "&scale=" + this.centerLocation.scale });
 
       } else if (e.index == 1) {
 
@@ -274,7 +284,7 @@ var QQMapWX = __webpack_require__(/*! @/libs/qqmap-wx-jssdk.js */ 160);var _defa
         console.log(res.target);
       }
       return {
-        title: '奇趣地图', //分享的名称
+        title: '鸟瞰地理', //分享的名称
         path: '/pages/map/map',
         mpId: 'wx120caeda2bba21e7' //此处配置微信小程序的AppId
       };
@@ -282,11 +292,12 @@ var QQMapWX = __webpack_require__(/*! @/libs/qqmap-wx-jssdk.js */ 160);var _defa
     //分享到朋友圈
     onShareTimeline: function onShareTimeline(res) {
       return {
-        title: '奇趣地图',
+        title: '鸟瞰地理',
         type: 0,
         summary: "" };
 
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

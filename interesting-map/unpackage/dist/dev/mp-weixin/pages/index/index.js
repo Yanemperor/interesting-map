@@ -98,19 +98,19 @@ var components
 try {
   components = {
     uList: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-list/u-list */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-list/u-list")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-list/u-list.vue */ 187))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-list/u-list */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-list/u-list")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-list/u-list.vue */ 195))
     },
     uListItem: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-list-item/u-list-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-list-item/u-list-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-list-item/u-list-item.vue */ 195))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-list-item/u-list-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-list-item/u-list-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-list-item/u-list-item.vue */ 203))
     },
     uSwiper: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-swiper/u-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-swiper/u-swiper")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-swiper/u-swiper.vue */ 203))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-swiper/u-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-swiper/u-swiper")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-swiper/u-swiper.vue */ 211))
     },
     uImage: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-image/u-image */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-image/u-image")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-image/u-image.vue */ 211))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-image/u-image */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-image/u-image")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-image/u-image.vue */ 219))
     },
     uLine: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-line/u-line */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-line/u-line")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-line/u-line.vue */ 219))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-line/u-line */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-line/u-line")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-line/u-line.vue */ 227))
     }
   }
 } catch (e) {
@@ -167,7 +167,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uniCloud, uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uniCloud, uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;} //
 //
 //
 //
@@ -218,7 +218,10 @@ var _default =
       zan: "/static/cell_zan.png",
       defalutImg: "/static/defalut-img.png",
       banners: [],
-      items: [] };
+      items: [],
+      page: 1,
+      pageSize: 5,
+      isLoadMore: true };
 
   },
   onLoad: function onLoad() {
@@ -231,14 +234,31 @@ var _default =
   },
   methods: {
     loadData: function loadData() {var _this = this;
+      this.page = 1;
       console.log("获取数据");
       var db = uniCloud.database();
-      var resume = db.collection("address_info").get().then(function (res) {
+      db.collection("address_info").orderBy("zan", "desc").limit(this.pageSize).get().then(function (res) {
         console.log("获取数据成功", res.result.data);
         _this.items = res.result.data;
         _this.setBanner();
+        _this.isLoadMore = true;
       }).catch(function (e) {
         console.log("获取数据失败", e);
+      });
+    },
+    loadMoreData: function loadMoreData() {var _this2 = this;
+      console.log("加载更多数据");
+      var db = uniCloud.database();
+      db.collection("address_info").orderBy("zan", "desc").skip((this.page - 1) * this.pageSize).
+      limit(this.pageSize).get().then(function (res) {var _this2$items;
+        console.log("加载更多数据成功", res.result.data);
+        (_this2$items = _this2.items).push.apply(_this2$items, _toConsumableArray(res.result.data));
+        console.log("count", res.result.data.length);
+        if (res.result.data.length < _this2.pageSize) {
+          _this2.isLoadMore = false;
+        }
+      }).catch(function (e) {
+        console.log("加载更多数据失败", e);
       });
     },
     setBanner: function setBanner() {
@@ -254,7 +274,11 @@ var _default =
       this.banners = banners;
     },
     scrolltolower: function scrolltolower() {
-
+      console.log("加载跟多");
+      if (this.isLoadMore) {
+        this.page++;
+        this.loadMoreData();
+      }
     },
     bannerClick: function bannerClick(index) {
       console.log(index);
@@ -274,7 +298,7 @@ var _default =
         console.log(res.target);
       }
       return {
-        title: '奇趣地图', //分享的名称
+        title: '鸟瞰地理', //分享的名称
         path: '/pages/index/index',
         mpId: 'wx120caeda2bba21e7' //此处配置微信小程序的AppId
       };
@@ -282,7 +306,7 @@ var _default =
     //分享到朋友圈
     onShareTimeline: function onShareTimeline(res) {
       return {
-        title: '奇趣地图',
+        title: '鸟瞰地理',
         type: 0,
         summary: "" };
 

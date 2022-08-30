@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "奇趣地图",
+  "navigationBarTitleText": "鸟瞰地理",
   "navigationBarBackgroundColor": "#ffffff",
   "usingComponents": {
     "u-list": "/uni_modules/uview-ui/components/u-list/u-list",

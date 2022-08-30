@@ -49,7 +49,10 @@
 				zan: "/static/cell_zan.png",
 				defalutImg: "/static/defalut-img.png",
 				banners: [],
-				items: []
+				items: [],
+				page: 1,
+				pageSize: 5,
+				isLoadMore: true
 			}
 		},
 		onLoad() {
@@ -62,14 +65,31 @@
 		},
 		methods: {
 			loadData() {
+				this.page = 1;
 				console.log("获取数据");
 				const db = uniCloud.database();
-				const resume = db.collection("address_info").get().then((res) => {
+				db.collection("address_info").orderBy("zan", "desc").limit(this.pageSize).get().then((res) => {
 					console.log("获取数据成功", res.result.data);
 					this.items = res.result.data;
 					this.setBanner();
+					this.isLoadMore = true;
 				}).catch((e) => {
 					console.log("获取数据失败", e);
+				});
+			},
+			loadMoreData() {
+				console.log("加载更多数据");
+				const db = uniCloud.database();
+				db.collection("address_info").orderBy("zan", "desc").skip((this.page - 1) * this.pageSize)
+					.limit(this.pageSize).get().then((res) => {
+					console.log("加载更多数据成功", res.result.data);
+					this.items.push(...res.result.data) 
+					console.log("count", res.result.data.length);
+					if (res.result.data.length < this.pageSize) {
+						this.isLoadMore = false
+					}
+				}).catch((e) => {
+					console.log("加载更多数据失败", e);
 				});
 			},
 			setBanner() {
@@ -85,7 +105,11 @@
 				this.banners = banners;
 			},
 			scrolltolower() {
-
+				console.log("加载跟多");
+				if (this.isLoadMore) {
+					this.page++;
+					this.loadMoreData();
+				}
 			},
 			bannerClick(index) {
 				console.log(index);
@@ -105,7 +129,7 @@
 					console.log(res.target)
 				}
 				return {
-					title: '奇趣地图', //分享的名称
+					title: '鸟瞰地理', //分享的名称
 					path: '/pages/index/index',
 					mpId: 'wx120caeda2bba21e7' //此处配置微信小程序的AppId
 				}
@@ -113,7 +137,7 @@
 			//分享到朋友圈
 			onShareTimeline(res) {
 				return {
-					title: '奇趣地图',
+					title: '鸟瞰地理',
 					type: 0,
 					summary: "",
 				}

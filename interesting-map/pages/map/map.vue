@@ -5,7 +5,8 @@
 			<u-search :showAction="true" actionText="搜索" :animation="false" @custom="search"></u-search>
 		</view>
 		<view class="">
-			<map class="map" enable-satellite="true" :latitude="latitude" :longitude="longitude" :scale="scale" :enable-3D="true"></map>
+			<map class="map" enable-satellite="true" :latitude="latitude" :longitude="longitude" :scale="scale"
+				:enable-3D="true" @regionchange="regionchange"></map>
 		</view>
 		<uni-fab ref="fab" :pattern="pattern" :content="content" horizontal="right" vertical="bottom"
 			direction="vertical" @trigger="trigger" @fabClick="fabClick" />
@@ -14,12 +15,19 @@
 
 <script>
 	let QQMapWX = require('@/libs/qqmap-wx-jssdk.js');
-	
+
 	export default {
 		data() {
 			return {
+				details: "",
+				popupShow: false,
 				latitude: "39.91507",
 				longitude: "116.39686",
+				centerLocation: {
+					latitude: "39.91507",
+					longitude: "116.39686",
+					scale: "15"
+				},
 				scale: "15",
 				pattern: {
 					color: '#7A7E83',
@@ -51,6 +59,13 @@
 			});
 		},
 		methods: {
+			regionchange(e) {
+				console.log(e);
+				if (e.type == "end") {
+					 this.centerLocation = e.detail.centerLocation;
+					 this.centerLocation.scale = e.detail.scale;
+				}
+			},
 			search(value) {
 				console.log(value);
 				this.getLocation(value);
@@ -64,54 +79,49 @@
 			trigger(e) {
 				console.log(e)
 				if (e.index == 0) {
-					this.$refs.uToast.show({
-						type: 'success',
-						title: '默认主题',
-						message: "点赞成功",
-						complete() {
-			
-						}
+					uni.navigateTo({
+						url: "/pages/map/contribute?latitude=" + this.centerLocation.latitude + "&longitude=" + this.centerLocation.longitude + "&scale=" + this.centerLocation.scale,
 					})
 				} else if (e.index == 1) {
-					
+
 				}
 			},
 			getLocation(title) {
-			  // 实例化API核心类
-			  let qqmapsdk = new QQMapWX({
-			    key: 'KDRBZ-DGVLJ-5W4FO-KLF7C-VGQT2-M4FOE' // 必填
-			  });
-			
-			  //调用地址解析接口
-			  qqmapsdk.geocoder({
-			    //获取表单传入地址
-			    address: title, // 地址参数，例：固定地址，address: '北京市海淀区彩和坊路海淀西大街74号'
-			    success: res => {
-			      //成功后的回调
-			      res = res.result;
-			      const lat = res.location.lat;
-			      const lng = res.location.lng;
-				  this.latitude = lat;
-				  this.longitude = lng;
-				  console.log(res);
-			    },
-			    fail: error => {
-			      wx.showToast({
-			        icon: 'none',
-			        title: '定位失败'
-			      });
-			    },
-			    complete: res => {
-			      console.log(res);
-			    }
-			  });
+				// 实例化API核心类
+				let qqmapsdk = new QQMapWX({
+					key: 'KDRBZ-DGVLJ-5W4FO-KLF7C-VGQT2-M4FOE' // 必填
+				});
+
+				//调用地址解析接口
+				qqmapsdk.geocoder({
+					//获取表单传入地址
+					address: title, // 地址参数，例：固定地址，address: '北京市海淀区彩和坊路海淀西大街74号'
+					success: res => {
+						//成功后的回调
+						res = res.result;
+						const lat = res.location.lat;
+						const lng = res.location.lng;
+						this.latitude = lat;
+						this.longitude = lng;
+						console.log(res);
+					},
+					fail: error => {
+						wx.showToast({
+							icon: 'none',
+							title: '定位失败'
+						});
+					},
+					complete: res => {
+						console.log(res);
+					}
+				});
 			},
 			onShareAppMessage(res) {
 				if (res.from === 'button') { // 来自页面内分享按钮
 					console.log(res.target)
 				}
 				return {
-					title: '奇趣地图', //分享的名称
+					title: '鸟瞰地理', //分享的名称
 					path: '/pages/map/map',
 					mpId: 'wx120caeda2bba21e7' //此处配置微信小程序的AppId
 				}
@@ -119,7 +129,7 @@
 			//分享到朋友圈
 			onShareTimeline(res) {
 				return {
-					title: '奇趣地图',
+					title: '鸟瞰地理',
 					type: 0,
 					summary: "",
 				}
@@ -135,6 +145,7 @@
 		padding-right: 16px;
 		padding-bottom: 12px;
 	}
+
 	.map {
 		width: 100%;
 		height: 1260rpx;

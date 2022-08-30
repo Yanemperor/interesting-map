@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "投稿",
+  "navigationBarTitleText": "商务合作",
   "navigationBarBackgroundColor": "#ffffff",
   "usingComponents": {
     "u-button": "/uni_modules/uview-ui/components/u-button/u-button",

@@ -6,7 +6,13 @@
 				:scale="item.scale"></map>
 		</view>
 		<view class="text">
-			<u--text :text="item.details"></u--text>
+			<!-- <u--text :text="item.details"></u--text> -->
+			{{ item.details }}
+		</view>
+		<view class="bottom-right">
+			<view class="right-text">
+				{{ "作者: " + item.author }}
+			</view>
 		</view>
 		<uni-fab ref="fab" :pattern="pattern" :content="content" horizontal="right" vertical="bottom"
 			direction="vertical" @trigger="trigger" @fabClick="fabClick" />
@@ -61,18 +67,26 @@
 		},
 		methods: {
 			clickZan() {
-				console.log("获取数据");
-				const db = uniCloud.database();
-				const dbCmd = db.command;
-				db.collection('address_info').where({
-					_id: '63088219abcff22faaa3c47e'
-				}).update({
-					zan: dbCmd.inc(1)
+				const id = this.item._id;
+				console.log("id", id);
+				uniCloud.callFunction({
+					name: 'updateZan',
+					data: {
+						id: id
+					}
 				}).then((res) => {
-					console.log("点赞成功", res);
-				}).catch((e) => {
-					console.log("点赞失败", e);
-				});
+					console.log("点赞成功")
+					this.$refs.uToast.show({
+						type: 'success',
+						title: '默认主题',
+						message: "点赞成功",
+						complete() {
+								
+						}
+					})
+				}).catch((err) => {
+					console.error(err)
+				})
 			},
 			initData(json) {
 				console.log(json);
@@ -87,30 +101,10 @@
 				// 	icon: 'none'
 				// })
 			},
-			testco() { // 注意异步
-			
-				uniCloud.callFunction({
-					name: 'updateZan',
-					data: {a:1,b:2}
-				}).then((res) => {
-					console.log(res.result) // 结果是 {sum: 3}
-				}).catch((err) => {
-					console.error(err)
-				})
-			},
 			trigger(e) {
 				console.log(e)
 				if (e.index == 0) {
-					this.testco();
-					// this.clickZan();
-					// this.$refs.uToast.show({
-					// 	type: 'success',
-					// 	title: '默认主题',
-					// 	message: "点赞成功",
-					// 	complete() {
-
-					// 	}
-					// })
+					this.clickZan();
 				} else if (e.index == 1) {
 					this.sheetShow = true;
 				}
@@ -139,7 +133,7 @@
 					console.log(res.target)
 				}
 				return {
-					title: '奇趣地图', //分享的名称
+					title: '鸟瞰地理', //分享的名称
 					path: '/pages/map/map',
 					mpId: 'wx120caeda2bba21e7' //此处配置微信小程序的AppId
 				}
@@ -147,7 +141,7 @@
 			//分享到朋友圈
 			onShareTimeline(res) {
 				return {
-					title: '奇趣地图',
+					title: '鸟瞰地理',
 					type: 0,
 					summary: "",
 				}
@@ -169,6 +163,18 @@
 		padding-right: 16px;
 		color: #333333;
 		font-size: 16px;
+	}
+	
+	.bottom-right {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.right-text {
+		color: #333333;
+		font-size: 18px;
+		font-weight: bold;
+		padding-right: 16px;
 	}
 
 	.floatview {

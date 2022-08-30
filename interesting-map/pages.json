@@ -2,7 +2,7 @@
 	"pages": [{
 		"path": "pages/index/index",
 		"style": {
-			"navigationBarTitleText": "奇趣地图",
+			"navigationBarTitleText": "鸟瞰地理",
 			"navigationBarBackgroundColor": "#ffffff"
 		}
 	}, {
@@ -28,9 +28,15 @@
 			"navigationBarBackgroundColor": "#ffffff"
 		}
 	}, {
-		"path": "pages/about/contribute",
+		"path": "pages/map/contribute",
 		"style": {
 			"navigationBarTitleText": "投稿",
+			"navigationBarBackgroundColor": "#ffffff"
+		}
+	}, {
+		"path": "pages/about/business_cooperation",
+		"style": {
+			"navigationBarTitleText": "商务合作",
 			"navigationBarBackgroundColor": "#ffffff"
 		}
 	}],

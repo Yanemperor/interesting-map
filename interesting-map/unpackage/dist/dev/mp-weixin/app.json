@@ -5,7 +5,8 @@
     "pages/map/map",
     "pages/about/about",
     "pages/about/more_app",
-    "pages/about/contribute"
+    "pages/map/contribute",
+    "pages/about/business_cooperation"
   ],
   "subPackages": [],
   "window": {

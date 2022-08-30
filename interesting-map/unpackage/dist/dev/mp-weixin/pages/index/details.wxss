@@ -11,6 +11,16 @@
 	color: #333333;
 	font-size: 16px;
 }
+.bottom-right {
+	display: flex;
+	justify-content: flex-end;
+}
+.right-text {
+	color: #333333;
+	font-size: 18px;
+	font-weight: bold;
+	padding-right: 16px;
+}
 .floatview {
 	width: 68px;
 	height: 68px;

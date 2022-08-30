@@ -98,16 +98,13 @@ var components
 try {
   components = {
     uToast: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uview-ui/components/u-toast/u-toast */ "uni_modules/uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-toast/u-toast.vue */ 227))
-    },
-    "u-Text": function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 234))
+      return __webpack_require__.e(/*! import() | uni_modules/uview-ui/components/u-toast/u-toast */ "uni_modules/uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-toast/u-toast.vue */ 235))
     },
     uniFab: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-fab/components/uni-fab/uni-fab */ "uni_modules/uni-fab/components/uni-fab/uni-fab").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-fab/components/uni-fab/uni-fab.vue */ 240))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-fab/components/uni-fab/uni-fab */ "uni_modules/uni-fab/components/uni-fab/uni-fab").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-fab/components/uni-fab/uni-fab.vue */ 242))
     },
     uActionSheet: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-action-sheet/u-action-sheet */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-action-sheet/u-action-sheet")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-action-sheet/u-action-sheet.vue */ 247))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-action-sheet/u-action-sheet */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-action-sheet/u-action-sheet")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-action-sheet/u-action-sheet.vue */ 249))
     }
   }
 } catch (e) {
@@ -181,6 +178,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -226,18 +229,26 @@ var _default =
     this.initData(option.json);
   },
   methods: {
-    clickZan: function clickZan() {
-      console.log("获取数据");
-      var db = uniCloud.database();
-      var dbCmd = db.command;
-      db.collection('address_info').where({
-        _id: '63088219abcff22faaa3c47e' }).
-      update({
-        zan: dbCmd.inc(1) }).
+    clickZan: function clickZan() {var _this = this;
+      var id = this.item._id;
+      console.log("id", id);
+      uniCloud.callFunction({
+        name: 'updateZan',
+        data: {
+          id: id } }).
+
       then(function (res) {
-        console.log("点赞成功", res);
-      }).catch(function (e) {
-        console.log("点赞失败", e);
+        console.log("点赞成功");
+        _this.$refs.uToast.show({
+          type: 'success',
+          title: '默认主题',
+          message: "点赞成功",
+          complete: function complete() {
+
+          } });
+
+      }).catch(function (err) {
+        console.error(err);
       });
     },
     initData: function initData(json) {
@@ -253,30 +264,10 @@ var _default =
       // 	icon: 'none'
       // })
     },
-    testco: function testco() {// 注意异步
-
-      uniCloud.callFunction({
-        name: 'updateZan',
-        data: { a: 1, b: 2 } }).
-      then(function (res) {
-        console.log(res.result); // 结果是 {sum: 3}
-      }).catch(function (err) {
-        console.error(err);
-      });
-    },
     trigger: function trigger(e) {
       console.log(e);
       if (e.index == 0) {
-        this.testco();
-        // this.clickZan();
-        // this.$refs.uToast.show({
-        // 	type: 'success',
-        // 	title: '默认主题',
-        // 	message: "点赞成功",
-        // 	complete() {
-
-        // 	}
-        // })
+        this.clickZan();
       } else if (e.index == 1) {
         this.sheetShow = true;
       }
@@ -305,7 +296,7 @@ var _default =
         console.log(res.target);
       }
       return {
-        title: '奇趣地图', //分享的名称
+        title: '鸟瞰地理', //分享的名称
         path: '/pages/map/map',
         mpId: 'wx120caeda2bba21e7' //此处配置微信小程序的AppId
       };
@@ -313,7 +304,7 @@ var _default =
     //分享到朋友圈
     onShareTimeline: function onShareTimeline(res) {
       return {
-        title: '奇趣地图',
+        title: '鸟瞰地理',
         type: 0,
         summary: "" };
 
