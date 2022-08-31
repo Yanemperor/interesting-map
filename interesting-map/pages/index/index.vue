@@ -61,9 +61,21 @@
 				//设置下方的Menus菜单，才能够让发送给朋友与分享到朋友圈两个按钮可以点击
 				menus: ["shareAppMessage", "shareTimeline"]
 			});
+			this.loadBanner();
 			this.loadData();
 		},
 		methods: {
+			loadBanner() {
+				const db = uniCloud.database();
+				db.collection("address_info").where({
+					"isBanner": true
+				}).get().then((res) => {
+					console.log("获取Banner成功", res.result.data);
+					this.banners = res.result.data;
+				}).catch((e) => {
+					console.log("获取Banner失败", e);
+				});
+			},
 			loadData() {
 				this.page = 1;
 				console.log("获取数据");
@@ -71,7 +83,6 @@
 				db.collection("address_info").orderBy("zan", "desc").limit(this.pageSize).get().then((res) => {
 					console.log("获取数据成功", res.result.data);
 					this.items = res.result.data;
-					this.setBanner();
 					this.isLoadMore = true;
 				}).catch((e) => {
 					console.log("获取数据失败", e);
@@ -91,18 +102,6 @@
 				}).catch((e) => {
 					console.log("加载更多数据失败", e);
 				});
-			},
-			setBanner() {
-				var banners = [];
-				for (let i = 0; i < this.items.length; i++) {
-					var item = this.items[i];
-					if (item.isBanner === true) {
-						item.title = item.address;
-						banners.push(item);
-					}
-				}
-				console.log(banners)
-				this.banners = banners;
 			},
 			scrolltolower() {
 				console.log("加载跟多");
