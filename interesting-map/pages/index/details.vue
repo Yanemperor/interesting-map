@@ -81,7 +81,7 @@
 						title: '默认主题',
 						message: "点赞成功",
 						complete() {
-								
+
 						}
 					})
 				}).catch((err) => {
@@ -106,7 +106,19 @@
 				if (e.index == 0) {
 					this.clickZan();
 				} else if (e.index == 1) {
-					this.sheetShow = true;
+					// this.sheetShow = true;
+					console.log("开始定位")
+					// uni.openLocation({
+					// 	latitude: this.item.latitude,
+					// 	longitude: this.item.longitude
+					// });
+					
+					uni.openLocation({
+						latitude: Number(this.item.latitude), //纬度
+						longitude: Number(this.item.longitude), //经度
+						name: this.item.name,
+						address: this.item.address
+					});
 				}
 			},
 			sheetSelect(item) {
@@ -121,10 +133,12 @@
 				uni.getLocation({
 					success(res) {
 						uni.openLocation({
-							latitude: 110.237768,
-							longitude: 20.068638,
-							scale: 14
+							latitude: item.latitude,
+							longitude: item.longitude,
+							name: item.name,
+							address: item.address
 						});
+
 					}
 				});
 			},
@@ -164,7 +178,7 @@
 		color: #333333;
 		font-size: 16px;
 	}
-	
+
 	.bottom-right {
 		display: flex;
 		justify-content: flex-end;

@@ -41,5 +41,10 @@
       }
     ]
   },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于用户导航到目标地点"
+    }
+  },
   "usingComponents": {}
 }

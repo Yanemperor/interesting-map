@@ -243,10 +243,14 @@ var QQMapWX = __webpack_require__(/*! @/libs/qqmap-wx-jssdk.js */ 160);var _defa
       console.log(e);
       if (e.index == 0) {
         uni.navigateTo({
-          url: "/pages/map/contribute?latitude=" + this.centerLocation.latitude + "&longitude=" + this.centerLocation.longitude + "&scale=" + this.centerLocation.scale });
+          url: "/pages/map/contribute?latitude=" + this.centerLocation.latitude + "&longitude=" +
+          this.centerLocation.longitude + "&scale=" + this.centerLocation.scale });
 
       } else if (e.index == 1) {
-
+        uni.openLocation({
+          latitude: Number(this.centerLocation.latitude), //纬度
+          longitude: Number(this.centerLocation.longitude) //经度
+        });
       }
     },
     getLocation: function getLocation(title) {var _this = this;

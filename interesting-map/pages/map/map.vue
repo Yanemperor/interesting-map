@@ -2,7 +2,7 @@
 	<view class="container">
 		<u-toast ref="uToast"></u-toast>
 		<view class="search">
-			<u-search :showAction="true" actionText="搜索" :animation="false" @custom="search"></u-search>
+			<u-search :showAction="true" actionText="搜索" :animation="false" @custom="search" @search="search"></u-search>
 		</view>
 		<view class="">
 			<map class="map" enable-satellite="true" :latitude="latitude" :longitude="longitude" :scale="scale"
@@ -62,8 +62,8 @@
 			regionchange(e) {
 				console.log(e);
 				if (e.type == "end") {
-					 this.centerLocation = e.detail.centerLocation;
-					 this.centerLocation.scale = e.detail.scale;
+					this.centerLocation = e.detail.centerLocation;
+					this.centerLocation.scale = e.detail.scale;
 				}
 			},
 			search(value) {
@@ -80,10 +80,14 @@
 				console.log(e)
 				if (e.index == 0) {
 					uni.navigateTo({
-						url: "/pages/map/contribute?latitude=" + this.centerLocation.latitude + "&longitude=" + this.centerLocation.longitude + "&scale=" + this.centerLocation.scale,
+						url: "/pages/map/contribute?latitude=" + this.centerLocation.latitude + "&longitude=" +
+							this.centerLocation.longitude + "&scale=" + this.centerLocation.scale,
 					})
 				} else if (e.index == 1) {
-
+					uni.openLocation({
+						latitude: Number(this.centerLocation.latitude), //纬度
+						longitude: Number(this.centerLocation.longitude), //经度
+					});
 				}
 			},
 			getLocation(title) {

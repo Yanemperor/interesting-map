@@ -32,7 +32,17 @@
 		onLoad() {},
 		methods: {
 			cellClick(item) {
-				uni.navigateBackMiniProgram({
+				// uni.navigateBackMiniProgram({
+				// 	appId: item.appId,
+				// 	path: item.path,
+				// 	success: (res) => {
+				// 		console.log("打开成功", res);
+				// 	},
+				// 	fail: (err) => {
+				// 		console.log(err);
+				// 	}
+				// })
+				uni.navigateToMiniProgram({
 					appId: item.appId,
 					path: item.path,
 					success: (res) => {
