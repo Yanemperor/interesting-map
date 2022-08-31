@@ -18280,9 +18280,9 @@ platform;exports.default = _default;
         "127.0.0.1",
         "10.200.154.239"
     ],
-    "debugPort": 63623,
+    "debugPort": 53010,
     "initialLaunchType": "remote",
-    "servePort": 63624,
+    "servePort": 53012,
     "skipFiles": [
         "<node_internals>/**/*.js",
         "/Applications/HBuilderX.app/Contents/HBuilderX/plugins/unicloud/**/*.js"
