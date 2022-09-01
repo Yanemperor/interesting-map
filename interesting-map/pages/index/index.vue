@@ -2,7 +2,7 @@
 	<view class="container">
 		<view class="list">
 			<u-list @scrolltolower="scrolltolower">
-				<u-list-item>
+				<u-list-item v-if="banners.length">
 					<u-swiper mode="scaleToFill" :list="banners" height="150" keyName="imageUrl" showTitle circular
 						@click="bannerClick">
 					</u-swiper>
@@ -38,6 +38,7 @@
 				</u-list-item>
 			</u-list>
 		</view>
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
@@ -56,15 +57,18 @@
 			}
 		},
 		onLoad() {
+			uni.startPullDownRefresh();
 			wx.showShareMenu({
 				withShareTicket: true,
 				//设置下方的Menus菜单，才能够让发送给朋友与分享到朋友圈两个按钮可以点击
 				menus: ["shareAppMessage", "shareTimeline"]
 			});
-			this.loadBanner();
-			this.loadData();
 		},
 		methods: {
+			onPullDownRefresh() {
+			  this.loadBanner();
+			  this.loadData();
+			},
 			loadBanner() {
 				const db = uniCloud.database();
 				db.collection("address_info").where({
@@ -84,8 +88,14 @@
 					console.log("获取数据成功", res.result.data);
 					this.items = res.result.data;
 					this.isLoadMore = true;
+					uni.stopPullDownRefresh();
 				}).catch((e) => {
 					console.log("获取数据失败", e);
+					uni.stopPullDownRefresh();
+					uni.showToast({
+						title: JSON.stringify(e),
+						icon: 'none'
+					});
 				});
 			},
 			loadMoreData() {

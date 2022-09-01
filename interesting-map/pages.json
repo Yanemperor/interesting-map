@@ -3,7 +3,8 @@
 		"path": "pages/index/index",
 		"style": {
 			"navigationBarTitleText": "鸟瞰地理",
-			"navigationBarBackgroundColor": "#ffffff"
+			"navigationBarBackgroundColor": "#ffffff",
+			"enablePullDownRefresh": true
 		}
 	}, {
 		"path": "pages/index/details",
